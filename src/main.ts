@@ -7,9 +7,14 @@ async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
   app.enableCors({
-    origin: '*',
-    methods: 'GET,POST,PATCH,DELETE',
-    allowedHeaders: 'Content-Type, Authorization',
+    origin: [
+      'http://localhost:3000',
+      'http://localhost:3001',
+      'https://v0-ai-recipe-generator-frontend.vercel.app',
+    ],
+    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+    credentials: true,
   });
 
   app.useGlobalPipes(
